@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:passarinho_app/screens/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeParse();
+
   runApp(MyApp());
+}
+
+Future<void> initializeParse() async {
+  await Parse().initialize(
+    'XcXQHXqxtHcOp0ue5BYh7bU4c5vzHTabMKkrpHGO',
+    'https://parseapi.back4app.com/',
+    clientKey: 'UtpNGkbv6eAOkpahaqzrRWvhMGouI1Jrs04TFDqJ',
+    debug: false,
+    autoSendSessionId: true,
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Passarinho App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: Container(),
+      home: HomeScreen(),
     );
   }
 }
