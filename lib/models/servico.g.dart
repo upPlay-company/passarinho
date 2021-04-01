@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'servico.dart';
+part of 'servico_model.dart';
 
 // **************************************************************************
 // StoreGenerator

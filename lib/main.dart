@@ -25,10 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Passarinho App',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-      ),
-      home: HomeScreen(),
+      theme: ThemeData(primarySwatch: Colors.red),
+      home: HomeViews(),
     );
   }
 }

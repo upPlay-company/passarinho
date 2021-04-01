@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:passarinho_app/views/servico_cadastro.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeViews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                     ))),
             title: Text('Serviços'),
             centerTitle: true,
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.red,
             actions: [
               IconButton(
                 icon: Icon(Icons.add_rounded),
