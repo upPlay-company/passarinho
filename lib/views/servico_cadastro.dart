@@ -1,9 +1,11 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:passarinho_app/controller/cadastro_controller.dart';
 
 class ServicoCadastro extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final _controller = new CadastroController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
