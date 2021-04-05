@@ -10,6 +10,16 @@ abstract class _ClienteBase with Store {
   @action
   changeName(String newName) => name = newName;
 
+  @computed
+  String get nameError {
+    if (name != null && name.length > 50)
+      return null;
+    else if (name != null && name.isEmpty)
+      return "Campo Obrigatório";
+    else
+      return " nome muito curto";
+  }
+
   @observable
   String cpf;
   @action

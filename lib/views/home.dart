@@ -5,6 +5,7 @@ class HomeViews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff2D2D3A),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(120),
         child: AppBar(

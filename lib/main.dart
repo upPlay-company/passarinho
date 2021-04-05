@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:passarinho_app/views/home.dart';
+import 'package:passarinho_app/views/Login/login_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Passarinho App',
       theme: ThemeData(primarySwatch: Colors.red),
-      home: HomeViews(),
+      home: LoginView(),
     );
   }
 }
