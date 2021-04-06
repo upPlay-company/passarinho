@@ -22,7 +22,10 @@ class HomeViews extends StatelessWidget {
                         Colors.red,
                       ],
                     ))),
-            title: Text('Serviços'),
+            title: Positioned(
+              top: 70,
+              child: Text("Serviços"),
+            ),
             centerTitle: true,
             backgroundColor: Colors.red,
             actions: [
