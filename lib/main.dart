@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Passarinho App',
-      theme: ThemeData(primarySwatch: Colors.red),
+      theme: ThemeData(hintColor: Colors.white, primarySwatch: Colors.red),
       home: LoginView(),
     );
   }

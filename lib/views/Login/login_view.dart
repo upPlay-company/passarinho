@@ -19,7 +19,6 @@ class _LoginViewState extends State<LoginView> {
         body: Container(
           color: Color(0xff2D2D3A),
           alignment: Alignment.center,
-          margin: const EdgeInsets.all(32),
           child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),

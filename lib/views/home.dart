@@ -12,7 +12,7 @@ class HomeViews extends StatelessWidget {
             flexibleSpace: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("images/LOGO PASSARINHO.png"),
+                        image: AssetImage("images/FAQ screen.png"),
                         alignment: Alignment.bottomLeft),
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
