@@ -11,6 +11,26 @@ class ServicoCadastro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xff2D2D3A),
+        appBar: AppBar(
+          toolbarHeight: 90,
+          flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "images/LOGO PASSARINHO.png",
+                      ),
+                      alignment: Alignment.bottomRight),
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: <Color>[
+                      Color(0xffcc),
+                      Colors.red,
+                    ],
+                  ))),
+          title: Text("Adicionar"),
+          centerTitle: true,
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(40),
@@ -18,7 +38,13 @@ class ServicoCadastro extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-                  Text("Cliente"),
+                  Text(
+                    "Cliente",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -26,14 +52,17 @@ class ServicoCadastro extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   ),
                   TextFormField(
+                    cursorColor: Colors.white,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      labelText: " Nome *",
-
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      hintText: "* Nome",
                       //errorText: Cliente.nameError,
                       labelStyle: TextStyle(
+                        color: Colors.white,
                         fontSize: 16,
                       ),
                     ),
@@ -54,10 +83,11 @@ class ServicoCadastro extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0)),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         labelText: " CPF ",
                         labelStyle: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                         )),
@@ -74,18 +104,25 @@ class ServicoCadastro extends StatelessWidget {
                   SizedBox(
                     height: 16,
                   ),
-                  Text("Veiculo"),
+                  Text(
+                    "Veiculo",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   ),
                   TextFormField(
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0)),
                       labelText: " Marca ",
                       labelStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
@@ -105,10 +142,13 @@ class ServicoCadastro extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
                           borderRadius: BorderRadius.circular(30)),
                       labelText: "Modelo",
                       labelStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
@@ -129,7 +169,7 @@ class ServicoCadastro extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30)),
                       labelText: "Placa",
                       labelStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
@@ -147,10 +187,11 @@ class ServicoCadastro extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       labelText: "Cor",
                       labelStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
@@ -169,18 +210,25 @@ class ServicoCadastro extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   ),
-                  Text("Serviços"),
+                  Text(
+                    "Serviços",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   ),
                   TextFormField(
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
+                      hoverColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30)),
                       labelText: "Descrição do Serviço * ",
                       labelStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
@@ -203,7 +251,7 @@ class ServicoCadastro extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30)),
                       labelText: "Peças * ",
                       labelStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
@@ -222,7 +270,13 @@ class ServicoCadastro extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   ),
-                  Text("Produtos"),
+                  Text(
+                    "Produtos",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   ),
@@ -233,7 +287,7 @@ class ServicoCadastro extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30)),
                       labelText: "Nome do Produto * ",
                       labelStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
