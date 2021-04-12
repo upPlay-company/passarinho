@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:passarinho_app/controller/cadastro_controller.dart';
-import 'package:passarinho_app/views_models/cadastro_view_model.dart';
+import 'package:passarinho_app/stores/servico_store.dart';
+import 'package:passarinho_app/views/servico_confirmar.dart';
 
-class ServicoCadastro extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final _controller = new CadastroController();
-  var model = new CadastroViewModel();
+class ServicoCadastro extends StatefulWidget {
+  @override
+  _ServicoCadastroState createState() => _ServicoCadastroState();
+}
+
+class _ServicoCadastroState extends State<ServicoCadastro> {
+  ServicoStore servicoStore = ServicoStore();
 
   @override
   Widget build(BuildContext context) {
@@ -14,28 +17,29 @@ class ServicoCadastro extends StatelessWidget {
         appBar: AppBar(
           toolbarHeight: 90,
           flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        "images/LOGO PASSARINHO.png",
-                      ),
-                      alignment: Alignment.bottomRight),
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: <Color>[
-                      Color(0xffcc),
-                      Colors.red,
-                    ],
-                  ))),
+            child: Center(
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Stack(
+                      children: [
+                        Image.asset(
+                          "images/FAQ screen.jpg",
+                          fit: BoxFit.fill,
+                          width: 360,
+                        ),
+                      ],
+                    )
+                  ]),
+            ),
+          ),
           title: Text("Adicionar"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(40),
+            padding: EdgeInsets.all(20),
             child: Form(
-              key: _formKey,
               child: Column(
                 children: <Widget>[
                   Text(
@@ -46,63 +50,37 @@ class ServicoCadastro extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
                   ),
-                  TextFormField(
-                    cursorColor: Colors.white,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      hintText: "* Nome",
-                      //errorText: Cliente.nameError,
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: TextField(
+                      autofocus: true,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(fontSize: 20),
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          hintText: "* Nome",
+                          filled: true,
+                          fillColor: Colors.grey,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(32))),
                     ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {
-                      model.name = val;
-                    },
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "CPF",
+                        filled: true,
+                        fillColor: Colors.grey,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        labelText: " CPF ",
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        )),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {
-                      model.cpf = val;
-                    },
-                  ),
-                  SizedBox(
-                    height: 16,
+                            borderRadius: BorderRadius.circular(32))),
                   ),
                   Text(
                     "Veiculo",
@@ -111,104 +89,58 @@ class ServicoCadastro extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      labelText: " Marca ",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {},
-                  ),
                   SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(30)),
-                      labelText: "Modelo",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {},
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      labelText: "Placa",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {},
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      labelText: "Cor",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {},
-                  ),
-                  SizedBox(
-                    height: 16,
+                    height: 10,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Marca",
+                        filled: true,
+                        fillColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32))),
+                  ),
+                  Divider(),
+                  TextField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Modelo",
+                        filled: true,
+                        fillColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32))),
+                  ),
+                  Divider(),
+                  TextField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Placa",
+                        filled: true,
+                        fillColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32))),
+                  ),
+                  Divider(),
+                  TextField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Cor",
+                        filled: true,
+                        fillColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32))),
                   ),
                   Text(
                     "Serviços",
@@ -217,107 +149,60 @@ class ServicoCadastro extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hoverColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      labelText: "Descrição do Serviço * ",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {},
-                  ),
                   SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      labelText: "Peças * ",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {},
-                  ),
-                  SizedBox(
-                    height: 16,
+                    height: 10,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
                   ),
+                  TextField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Descrição do Serviço",
+                        filled: true,
+                        fillColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32))),
+                  ),
+                  Divider(),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Peças",
+                        filled: true,
+                        fillColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32))),
+                  ),
+                  Divider(),
                   Text(
-                    "Produtos",
+                    "Valor total :",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      labelText: "Nome do Produto * ",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return ("valor Inválido");
-                      }
-                      return null;
-                    },
-                    onSaved: (val) {},
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
-                        onPrimary: Colors.white,
-                      ),
-                      child: Text('Confirmar'),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          _formKey.currentState.save();
-                        }
-                        print(model.name);
-                        print(model.cpf);
-
-                        _controller.create(model);
-                      }),
+                    padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    child: ElevatedButton(
+                        child: Text('Confirmar'),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(32))),
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => ServicoConfirmado()));
+                        }),
+                  )
                 ],
               ),
             ),

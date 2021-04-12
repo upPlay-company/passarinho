@@ -6,24 +6,32 @@ class LoginStore = _LoginStoreBase with _$LoginStore;
 abstract class _LoginStoreBase with Store {
   _LoginStore() {
     autorun((_) {
-      print(isFormValid);
+      print(isFormavalid);
     });
   }
 
   @observable
   String email = "";
 
+  @computed
+  String get EmailError {
+    if (email.isNotEmpty && email.contains("@"))
+      return null;
+    else if (email.isEmpty)
+      return 'Campo obrigatório';
+    else
+      return 'email inválido';
+  }
+
   @action
   void setEmail(String value) => email = value;
+
   @observable
   String senha = "";
 
-  @action
-  void setPassord(String value) => senha = value;
-
   @computed
-  bool get isFormValid => email.length > 6 && senha.length > 6;
+  bool get isFormavalid => senha.length > 6;
 
-  // RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$
-//Improve thi").hasMatch(email);
+  @action
+  void setSenha(String value) => senha = value;
 }

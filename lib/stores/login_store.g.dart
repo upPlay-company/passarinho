@@ -9,12 +9,19 @@ part of 'login_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginStore on _LoginStoreBase, Store {
-  Computed<bool> _$isFormValidComputed;
+  Computed<String> _$EmailErrorComputed;
 
   @override
-  bool get isFormValid =>
-      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
-              name: '_LoginStoreBase.isFormValid'))
+  String get EmailError =>
+      (_$EmailErrorComputed ??= Computed<String>(() => super.EmailError,
+              name: '_LoginStoreBase.EmailError'))
+          .value;
+  Computed<bool> _$isFormavalidComputed;
+
+  @override
+  bool get isFormavalid =>
+      (_$isFormavalidComputed ??= Computed<bool>(() => super.isFormavalid,
+              name: '_LoginStoreBase.isFormavalid'))
           .value;
 
   final _$emailAtom = Atom(name: '_LoginStoreBase.email');
@@ -62,11 +69,11 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
-  void setPassord(String value) {
+  void setSenha(String value) {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.setPassord');
+        name: '_LoginStoreBase.setSenha');
     try {
-      return super.setPassord(value);
+      return super.setSenha(value);
     } finally {
       _$_LoginStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -77,7 +84,8 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     return '''
 email: ${email},
 senha: ${senha},
-isFormValid: ${isFormValid}
+EmailError: ${EmailError},
+isFormavalid: ${isFormavalid}
     ''';
   }
 }

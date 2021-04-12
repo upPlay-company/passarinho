@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:passarinho_app/stores/login_store.dart';
 import 'package:passarinho_app/views/home.dart';
-import 'package:passarinho_app/widgets/custom_field.dart';
-import 'package:passarinho_app/widgets/custom_icon_buttom.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -14,62 +13,73 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         body: Container(
-          color: Color(0xff2D2D3A),
-          alignment: Alignment.center,
-          child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+      decoration: BoxDecoration(color: Color(0xff2D2D3A)),
+      padding: EdgeInsets.all(20),
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(bottom: 38),
+                child: Image.asset("images/LOGO PASSARINHO.png",
+                    width: 200, height: 200),
               ),
-              elevation: 16,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    CustomTextField(
-                      hint: 'E-mail',
-                      prefix: Icon(Icons.account_circle),
-                      textInputType: TextInputType.emailAddress,
-                      onChanged: loginStore.setEmail,
-                      enabled: true,
+              Observer(builder: (_) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: TextField(
+                    autofocus: true,
+                    keyboardType: TextInputType.emailAddress,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                      errorText: loginStore.EmailError,
+                      contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                      hintText: "Email",
+                      filled: true,
+                      fillColor: Colors.grey,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32)),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomTextField(
-                      hint: 'Senha',
-                      prefix: Icon(Icons.lock),
-                      obscure: true,
-                      onChanged: loginStore.setPassord,
-                      enabled: true,
-                      suffix: CustomIconButton(
-                        radius: 32,
-                        iconData: Icons.visibility,
-                        onTap: () {},
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SizedBox(
-                      height: 44,
-                      child: ElevatedButton(
-                        child: Text('Login'),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => HomeViews()));
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              )),
+                    onChanged: loginStore.setEmail,
+                  ),
+                );
+              }),
+              TextField(
+                keyboardType: TextInputType.text,
+                obscureText: true,
+                style: TextStyle(fontSize: 20),
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    hintText: "Senha",
+                    filled: true,
+                    fillColor: Colors.grey,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32))),
+                onChanged: loginStore.setSenha,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                child: ElevatedButton(
+                    child: Text('Login'),
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32))),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => HomeViews()));
+                    }),
+              )
+            ],
+          ),
         ),
       ),
-    );
+    ));
   }
 }

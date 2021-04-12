@@ -54,6 +54,9 @@ flutter:
   assets:
      - images/LOGO PASSARINHO.png
      - images/FAQ screen.png
+     - images/FAQ screen.jpg
+    
+     
 
   #   - images/a_dot_ham.jpeg
 

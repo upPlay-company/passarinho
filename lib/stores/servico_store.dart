@@ -1,9 +1,9 @@
 import 'package:mobx/mobx.dart';
-part 'servico.g.dart';
+part 'servico_store.g.dart';
 
-class Cliente = _ClienteBase with _$Cliente;
+class ServicoStore = _ServicoStoreBase with _$ServicoStore;
 
-abstract class _ClienteBase with Store {
+abstract class _ServicoStoreBase with Store {
   @observable
   String name;
 
@@ -11,24 +11,21 @@ abstract class _ClienteBase with Store {
   changeName(String newName) => name = newName;
 
   @computed
+  bool get nameValid => name != null && name.length > 6;
   String get nameError {
-    if (name != null && name.length > 50)
+    if (name == null || nameValid)
       return null;
-    else if (name != null && name.isEmpty)
-      return "Campo Obrigatório";
+    else if (name.isEmpty)
+      return 'Campo Obrigatório';
     else
-      return " nome muito curto";
+      return 'Nome curto';
   }
 
   @observable
   String cpf;
   @action
   changeCpf(String newCpf) => cpf = newCpf;
-}
 
-class Veiculo = _VeiculoBase with _$Veiculo;
-
-abstract class _VeiculoBase with Store {
   @observable
   String marca;
   @action
@@ -47,11 +44,7 @@ abstract class _VeiculoBase with Store {
   @observable
   String cor;
   changeCor(String newCor) => cor = newCor;
-}
 
-class Servico = _ServicoBase with _$Servico;
-
-abstract class _ServicoBase with Store {
   @observable
   String descricao;
   changeDescricao(String newDescricao) => descricao = newDescricao;
