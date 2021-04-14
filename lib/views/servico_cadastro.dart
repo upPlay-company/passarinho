@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passarinho_app/stores/servico_store.dart';
-import 'package:passarinho_app/views/servico_confirmar.dart';
+import 'package:passarinho_app/views/servico_visualizacao.dart';
 
 class ServicoCadastro extends StatefulWidget {
   @override
@@ -15,26 +15,22 @@ class _ServicoCadastroState extends State<ServicoCadastro> {
     return Scaffold(
         backgroundColor: Color(0xff2D2D3A),
         appBar: AppBar(
-          toolbarHeight: 90,
-          flexibleSpace: Container(
-            child: Center(
-              child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Stack(
-                      children: [
-                        Image.asset(
-                          "images/FAQ screen.jpg",
-                          fit: BoxFit.fill,
-                          width: 360,
-                        ),
-                      ],
-                    )
-                  ]),
-            ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Image.asset(
+                'images/FAQ screen.png',
+                fit: BoxFit.cover,
+                height: 45.0,
+              ),
+              Image.asset(
+                'images/LOGO PASSARINHO.png',
+                height: 32,
+              ),
+              Container(
+                  padding: const EdgeInsets.all(8.0), child: Text('Adicionar'))
+            ],
           ),
-          title: Text("Adicionar"),
-          centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -200,7 +196,7 @@ class _ServicoCadastroState extends State<ServicoCadastro> {
                         onPressed: () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => ServicoConfirmado()));
+                                  builder: (context) => ServicoVisualizacao()));
                         }),
                   )
                 ],

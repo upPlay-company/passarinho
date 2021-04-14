@@ -25,28 +25,24 @@ class _LoginViewState extends State<LoginView> {
               Padding(
                 padding: EdgeInsets.only(bottom: 38),
                 child: Image.asset("images/LOGO PASSARINHO.png",
-                    width: 200, height: 200),
+                    width: 200, height: 250),
               ),
-              Observer(builder: (_) {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: TextField(
-                    autofocus: true,
-                    keyboardType: TextInputType.emailAddress,
-                    style: TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
-                      errorText: loginStore.EmailError,
-                      contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      hintText: "Email",
-                      filled: true,
-                      fillColor: Colors.grey,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32)),
-                    ),
-                    onChanged: loginStore.setEmail,
+              Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: TextField(
+                  autofocus: true,
+                  keyboardType: TextInputType.emailAddress,
+                  style: TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    hintText: "Email",
+                    filled: true,
+                    fillColor: Colors.grey,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32)),
                   ),
-                );
-              }),
+                ),
+              ),
               TextField(
                 keyboardType: TextInputType.text,
                 obscureText: true,
@@ -58,24 +54,25 @@ class _LoginViewState extends State<LoginView> {
                     fillColor: Colors.grey,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32))),
-                onChanged: loginStore.setSenha,
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                child: ElevatedButton(
-                    child: Text('Login'),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                        textStyle: TextStyle(
-                          fontSize: 20,
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32))),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => HomeViews()));
-                    }),
-              )
+              Observer(builder: (_) {
+                return Padding(
+                  padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  child: ElevatedButton(
+                      child: Text('Login'),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32))),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeViews()));
+                      }),
+                );
+              }),
             ],
           ),
         ),
