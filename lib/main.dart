@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:passarinho_app/views/Login/login_view.dart';
+import 'package:passarinho_app/stores/page_store.dart';
+import 'package:passarinho_app/stores/user_manager_store.dart';
+import 'package:passarinho_app/views/inicial/inicial_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeParse();
-
+  setupLocation();
   runApp(MyApp());
+}
+
+ GetIt location = GetIt.instance;
+
+void setupLocation(){
+  location.registerSingleton(UserManagerStore());
+  location.registerSingleton(PageStore());
 }
 
 Future<void> initializeParse() async {
   await Parse().initialize(
-    'XcXQHXqxtHcOp0ue5BYh7bU4c5vzHTabMKkrpHGO',
+    'tSz5MokTd8ApdSzzSfQ7nZS5MZDJolAd1A6jJI2s',
     'https://parseapi.back4app.com/',
-    clientKey: 'UtpNGkbv6eAOkpahaqzrRWvhMGouI1Jrs04TFDqJ',
+    clientKey: 'XraerousDcxQQ6rNWrIto2p9OVC26MZcw7Ohlfmn',
     debug: false,
     autoSendSessionId: true,
   );
@@ -25,9 +35,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Passarinho App',
-      theme:
-          ThemeData(primaryColor: Colors.red, accentColor: Colors.blue),
-      home: LoginView(),
+      theme: ThemeData(primaryColor: Colors.red, accentColor: Colors.blue),
+      home: InicialScreen(),
     );
   }
 }

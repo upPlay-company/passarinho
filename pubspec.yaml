@@ -32,6 +32,7 @@ dependencies:
   mobx: ^1.2.1+4
   flutter_mobx: ^1.1.0+2
   brasil_fields: ^1.1.1
+  get_it: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -52,9 +53,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - images/LOGO PASSARINHO.png
-     - images/FAQ screen.png
-     - images/FAQ screen.jpg
+     - images/
     
      
 
