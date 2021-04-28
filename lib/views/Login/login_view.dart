@@ -66,6 +66,7 @@ class _LoginViewState extends State<LoginView> {
                     return TextField(
                       keyboardType: TextInputType.text,
                       style: TextStyle(fontSize: 20),
+                      obscureText: true,
                       onChanged: loginStore.setPassword,
                       decoration: InputDecoration(
                           errorText: loginStore.passwordError,

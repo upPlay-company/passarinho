@@ -23,38 +23,46 @@ class CustomDrawerHeader extends StatelessWidget {
         }
       },
       child: Container(
-        color: Colors.purple,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/FAQ screen.png'),
+            fit: BoxFit.fill
+          )
+        ),
         height: 95,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            Icon(Icons.person, color: Colors.white, size: 35,),
+            Container(
+              height: 80,
+              width: 50,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('images/LOGO PASSARINHO.png'),
+                      fit: BoxFit.fill
+                  )
+              ),
+            ),
             const SizedBox(width: 20,),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text('Mecânico:', style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                   ),
+                  ),
                   Text(
-                    userManagerStore.isLoggedIn
-                        ? userManagerStore.user.name
-                        : 'Acesse sua conta agora!',
+                    userManagerStore.user.name,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text(
-                      userManagerStore.isLoggedIn
-                          ? userManagerStore.user.email
-                          : 'Clique aqui',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      )
-                  )
                 ],
               ),
             )

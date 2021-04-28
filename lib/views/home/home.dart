@@ -12,6 +12,7 @@ class _HomeViewsState extends State<HomeViews> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xff2D2D3A),
+        drawer: CustomDrawer(),
         appBar: AppBar(
               flexibleSpace: Container(
                   height: 200,
@@ -20,7 +21,6 @@ class _HomeViewsState extends State<HomeViews> {
                     image: AssetImage("images/FAQ screen.png"),
                     fit: BoxFit.fill,
                   ))),
-              automaticallyImplyLeading: false,
               title: Text("Serviços"),
               centerTitle: true,
               actions: <Widget>[
@@ -34,7 +34,7 @@ class _HomeViewsState extends State<HomeViews> {
                 )
               ],
             ),
-      drawer: CustomDrawer(),
+      body: Container(color: Colors.white,),
     );
   }
 }

@@ -7,6 +7,13 @@ class PerfilScreen extends StatelessWidget {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
+         flexibleSpace: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/FAQ screen.png"),
+                    fit: BoxFit.fill,
+                  ))),
         title: Text('Seu perfil'),
         centerTitle: true,
       ),

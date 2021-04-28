@@ -24,7 +24,7 @@ class PageSection extends StatelessWidget {
     return Column(
       children: [
         PageTile(
-          label: 'Home',
+          label: 'Lista de Serviços',
           iconData: Icons.list,
           onTap: () {
             pageStore.setPage(0);
