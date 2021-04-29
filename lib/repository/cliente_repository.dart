@@ -32,8 +32,6 @@ class ClienteRepository {
       adObject.set<String>(keyClienteEstado, cliente.cep.uf.initials);
       adObject.set<String>(keyClienteCep, cliente.cep.zipCode);
 
-      adObject.set<ParseUser>(keyClienteOwner, parseUser);
-
       final response = await adObject.save();
 
       if (!response.success) {

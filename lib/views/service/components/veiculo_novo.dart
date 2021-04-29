@@ -1,11 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:passarinho_app/model/veiculo/veiculo.dart';
+import 'package:passarinho_app/stores/veiculo_novo_store.dart';
+import 'package:passarinho_app/views/service/components/direcao_field.dart';
 
 class VeiculoNovo extends StatefulWidget {
+  VeiculoNovo({this.veiculo});
+
+  final Veiculo veiculo;
+
   @override
-  _VeiculoNovoState createState() => _VeiculoNovoState();
+  _VeiculoNovoState createState() => _VeiculoNovoState(veiculo);
 }
 
 class _VeiculoNovoState extends State<VeiculoNovo> {
+  _VeiculoNovoState(Veiculo veiculo)
+      : editing = veiculo != null,
+        store = VeiculoNovoStore(veiculo ?? Veiculo());
+
+  final VeiculoNovoStore store;
+
+  bool editing;
+
+  @override
+  void initState() {
+    super.initState();
+
+    when((_) => store.savedAd, () {
+      Navigator.of(context).pop(true);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,9 +41,9 @@ class _VeiculoNovoState extends State<VeiculoNovo> {
             height: 200,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("images/FAQ screen.png"),
-                  fit: BoxFit.fill,
-                ))),
+              image: AssetImage("images/FAQ screen.png"),
+              fit: BoxFit.fill,
+            ))),
         title: Text('Adicionar Veiculo'),
         centerTitle: true,
       ),
@@ -44,113 +70,132 @@ class _VeiculoNovoState extends State<VeiculoNovo> {
                             borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 20),
-                    cursorColor: Colors.red,
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                        hintText: "Placa *",
-                        filled: true,
-                        fillColor: Colors.grey,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                  ),
-                ),
+                Observer(builder: (_) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: TextField(
+                      onChanged: store.setPlaca,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(fontSize: 20),
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                          errorText: store.placaError,
+                          contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
+                          hintText: "Placa *",
+                          filled: true,
+                          fillColor: Colors.grey,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                  );
+                }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width *0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Marca *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width *0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Modelo *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
+                    Observer(builder: (_) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: TextFormField(
+                          onChanged: store.setMarca,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 20),
+                          cursorColor: Colors.red,
+                          decoration: InputDecoration(
+                              errorText: store.marcaError,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
+                              hintText: "Marca *",
+                              filled: true,
+                              fillColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                      );
+                    }),
+                    Observer(builder: (_) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: TextFormField(
+                          onChanged: store.setModelo,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 20),
+                          cursorColor: Colors.red,
+                          decoration: InputDecoration(
+                              errorText: store.modeloError,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
+                              hintText: "Modelo *",
+                              filled: true,
+                              fillColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                      );
+                    })
                   ],
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width *0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Ano Modelo *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width *0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Km *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
+                    Observer(builder: (_) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: TextFormField(
+                          onChanged: store.setAnoModelo,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 20),
+                          cursorColor: Colors.red,
+                          decoration: InputDecoration(
+                              errorText: store.modeloError,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
+                              hintText: "Ano Modelo *",
+                              filled: true,
+                              fillColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                      );
+                    }),
+                    Observer(builder: (_) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: TextFormField(
+                          onChanged: store.setKm,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 20),
+                          cursorColor: Colors.red,
+                          decoration: InputDecoration(
+                              errorText: store.kmError,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
+                              hintText: "Km *",
+                              filled: true,
+                              fillColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                      );
+                    })
                   ],
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width *0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Direção *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)),
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: DirecaoField(store)),
                     Container(
-                      width: MediaQuery.of(context).size.width *0.45,
+                      width: MediaQuery.of(context).size.width * 0.45,
                       child: TextFormField(
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 20),
@@ -166,27 +211,34 @@ class _VeiculoNovoState extends State<VeiculoNovo> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Observer(builder: (_) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: TextFormField(
+                          onChanged: store.setMotor,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 20),
+                          cursorColor: Colors.red,
+                          decoration: InputDecoration(
+                              errorText: store.motorError,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
+                              hintText: "Motor *",
+                              filled: true,
+                              fillColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                      );
+                    }),
                     Container(
-                      width: MediaQuery.of(context).size.width *0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Motor *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width *0.45,
+                      width: MediaQuery.of(context).size.width * 0.45,
                       child: TextFormField(
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 20),
@@ -202,27 +254,34 @@ class _VeiculoNovoState extends State<VeiculoNovo> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Observer(builder: (_) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: TextFormField(
+                          onChanged: store.setCor,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 20),
+                          cursorColor: Colors.red,
+                          decoration: InputDecoration(
+                              errorText: store.corError,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
+                              hintText: "Cor *",
+                              filled: true,
+                              fillColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                      );
+                    }),
                     Container(
-                      width: MediaQuery.of(context).size.width *0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Cor *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width *0.45,
+                      width: MediaQuery.of(context).size.width * 0.45,
                       child: TextFormField(
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 20),
@@ -242,11 +301,14 @@ class _VeiculoNovoState extends State<VeiculoNovo> {
                   padding: const EdgeInsets.only(left: 10, top: 10),
                   child: Row(
                     children: [
-                      Text('* Obrigatório', style: TextStyle(color: Colors.white, fontSize: 16))
+                      Text('* Obrigatório',
+                          style: TextStyle(color: Colors.white, fontSize: 16))
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 SizedBox(
                   height: 54,
                   child: ElevatedButton(
@@ -258,10 +320,12 @@ class _VeiculoNovoState extends State<VeiculoNovo> {
                         ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    onPressed: (){},
+                    onPressed: () {},
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),

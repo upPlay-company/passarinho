@@ -22,7 +22,6 @@ const keyValvulaNumero = 'numero';
 
 const keyClienteTable = 'cliente';
 const keyClienteId = 'objectId';
-const keyClienteOwner = 'mecanico';
 const keyClienteNome = 'nome';
 const keyClienteTelefone = 'telefone';
 const keyClienteCpf = 'cpf';
@@ -33,5 +32,20 @@ const keyClienteRua = 'rua';
 const keyClienteBairro = 'bairro';
 const keyClienteCidade = 'cidade';
 const keyClienteEstado = 'estado';
+
+const keyVeiculoTable = 'veiculo';
+const keyVeiculoId = 'objectId';
+const keyVeiculoDono = 'id_cliente';
+const keyVeiculoPlaca = 'placa';
+const keyVeiculoMarca = 'marca';
+const keyVeiculoModelo = 'modelo';
+const keyVeiculoAnoModelo = 'ano_mod';
+const keyVeiculoKm = 'km';
+const keyVeiculoDirecao = 'direcao';
+const keyVeiculoCambio = 'cambio';
+const keyVeiculoMotor = 'motor';
+const keyVeiculoValvula = 'valvulas';
+const keyVeiculoCor = 'cor';
+const keyVeiculoCombustivel = 'combustivel';
 
 

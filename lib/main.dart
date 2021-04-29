@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:passarinho_app/stores/cambio_store.dart';
+import 'package:passarinho_app/stores/combustivel_store.dart';
+import 'package:passarinho_app/stores/direcao_store.dart';
 import 'package:passarinho_app/stores/page_store.dart';
 import 'package:passarinho_app/stores/user_manager_store.dart';
+import 'package:passarinho_app/stores/valvula_store.dart';
 import 'package:passarinho_app/views/inicial/inicial_screen.dart';
 
 void main() async {
@@ -17,6 +21,10 @@ void main() async {
 void setupLocation(){
   location.registerSingleton(UserManagerStore());
   location.registerSingleton(PageStore());
+  location.registerSingleton(CambiolStore());
+  location.registerSingleton(CombustivelStore());
+  location.registerSingleton(ValvulaStore());
+  location.registerSingleton(DirecaoStore());
 }
 
 Future<void> initializeParse() async {

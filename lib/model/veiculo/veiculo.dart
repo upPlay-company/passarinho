@@ -1,12 +1,12 @@
 import 'package:passarinho_app/model/cliente/cliente.dart';
+import 'package:passarinho_app/model/user/user.dart';
 
 import 'components/cambio/cambio.dart';
 import 'components/combustivel/combustivel.dart';
 import 'components/direcao/direcao.dart';
 import 'components/valvula/valvula.dart';
 
-// ignore: camel_case_types
-class veiculo {
+class Veiculo {
 
   String id;
   Cliente cliente;
@@ -21,8 +21,9 @@ class veiculo {
   Valvula valvula;
   String cor;
   Combustivel combustivel;
+  User user;
 
-  veiculo(
+  Veiculo(
       {this.id,
       this.cliente,
       this.placa,
@@ -35,10 +36,11 @@ class veiculo {
       this.motor,
       this.valvula,
       this.cor,
-      this.combustivel});
+      this.combustivel,
+      this.user});
 
   @override
   String toString() {
-    return 'veiculo{id: $id, cliente: $cliente, placa: $placa, marca: $marca, modelo: $modelo, anoModelo: $anoModelo, km: $km, direcao: $direcao, cambio: $cambio, motor: $motor, valvula: $valvula, cor: $cor, combustivel: $combustivel}';
+    return 'veiculo{id: $id, cliente: $cliente, placa: $placa, marca: $marca, modelo: $modelo, anoModelo: $anoModelo, km: $km, direcao: $direcao, cambio: $cambio, motor: $motor, valvula: $valvula, cor: $cor, combustivel: $combustivel, user: $user}';
   }
 }
