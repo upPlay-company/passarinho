@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:passarinho_app/common/error_box.dart';
-import 'package:passarinho_app/model/cliente/cliente.dart';
-import 'package:passarinho_app/stores/cliente_store.dart';
+import 'package:passarinho_app/model/veiculo/veiculo.dart';
+import 'package:passarinho_app/stores/veiculo_store.dart';
 
-class ClienteScreen extends StatelessWidget {
-  ClienteScreen({this.showAll = true, this.selected});
+class VeiculoScreen extends StatelessWidget {
+  VeiculoScreen({this.showAll = true, this.selected});
 
-  final Cliente selected;
+  final Veiculo selected;
   final bool showAll;
 
-  final ClienteStore clienteStore = GetIt.I<ClienteStore>();
+  final VeiculoStore veiculoStore = GetIt.I<VeiculoStore>();
 
   @override
   Widget build(BuildContext context) {
+    print(veiculoStore.veiculoList);
     return Scaffold(
       backgroundColor: Color(0xff2D2D3A),
       appBar: AppBar(
@@ -35,36 +36,36 @@ class ClienteScreen extends StatelessWidget {
           ),
           elevation: 8,
           child: Observer(builder: (_) {
-            if (clienteStore.error != null) {
+            if (veiculoStore.error != null) {
               return ErrorBox(
-                message: clienteStore.error,
+                message: veiculoStore.error,
               );
-            } else if (clienteStore.clienteList.isEmpty) {
+            } else if (veiculoStore.veiculoList.isEmpty) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             } else {
-              final clientes = showAll
-                  ? clienteStore.allClienteList
-                  : clienteStore.clienteList;
+              final veiculos = showAll
+                  ? veiculoStore.allVeiculoList
+                  : veiculoStore.veiculoList;
 
               return ListView.separated(
-                itemCount: clientes.length,
+                itemCount: veiculos.length,
                 separatorBuilder: (_, __) {
                   return Container(
                     height: 5,
                   );
                 },
                 itemBuilder: (_, index) {
-                  final cliente = clientes[index];
+                  final veiculo = veiculos[index];
 
                   return InkWell(
                     onTap: () {
-                      Navigator.of(context).pop(cliente);
+                      Navigator.of(context).pop(veiculo);
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: cliente.id == selected?.id
+                          color: veiculo.id == selected?.id
                               ? Theme.of(context).primaryColor
                               : null,
                           borderRadius: BorderRadius.circular(10)
@@ -72,10 +73,10 @@ class ClienteScreen extends StatelessWidget {
                       height: 50,
                       alignment: Alignment.center,
                       child: Text(
-                        cliente.nome,
+                        'Placa: ${veiculo.placa}, ${veiculo.modelo} - ${veiculo.marca} \nDono do veículo: ${veiculo.cliente?.nome}',
                         style: TextStyle(
                           color: Colors.black,
-                          fontWeight: cliente.id == selected?.id
+                          fontWeight: veiculo.id == selected?.id
                               ? FontWeight.bold
                               : null,
                         ),

@@ -1,5 +1,7 @@
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:passarinho_app/model/cliente/cliente.dart';
 import 'package:passarinho_app/model/user/user.dart';
+import 'package:passarinho_app/repository/table_keys.dart';
 
 import 'components/cambio/cambio.dart';
 import 'components/combustivel/combustivel.dart';
@@ -22,6 +24,21 @@ class Veiculo {
   String cor;
   Combustivel combustivel;
   User user;
+
+  Veiculo.fromParse(ParseObject object)
+      : id = object.objectId,
+        cliente = Cliente.fromParse(object.get<ParseObject>(keyVeiculoDono)),
+        placa = object.get(keyVeiculoPlaca),
+        marca = object.get(keyVeiculoMarca),
+        modelo = object.get(keyVeiculoModelo),
+        anoModelo = object.get(keyVeiculoAnoModelo),
+        km = object.get(keyVeiculoKm),
+        direcao = Direcao.fromParse(object.get<ParseObject>(keyVeiculoDirecao)),
+        cambio = Cambio.fromParse(object.get<ParseObject>(keyVeiculoCambio)),
+        motor = object.get(keyVeiculoMotor),
+        valvula = Valvula.fromParse(object.get<ParseObject>(keyVeiculoValvula)),
+        cor = object.get(keyVeiculoCor),
+        combustivel = Combustivel.fromParse(object.get<ParseObject>(keyVeiculoCombustivel));
 
   Veiculo(
       {this.id,

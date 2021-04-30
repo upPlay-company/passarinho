@@ -5,7 +5,6 @@ import 'package:mobx/mobx.dart';
 import 'package:passarinho_app/common/error_box.dart';
 import 'package:passarinho_app/stores/login_store.dart';
 import 'package:passarinho_app/stores/user_manager_store.dart';
-import '../home/home.dart';
 
 class LoginView extends StatefulWidget {
   @override

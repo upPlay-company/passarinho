@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
-import 'package:passarinho_app/stores/user_manager_store.dart';
 import 'package:passarinho_app/views/Login/login_view.dart';
-import 'package:passarinho_app/views/base/base_screen.dart';
 
 class InicialScreen extends StatefulWidget {
   @override

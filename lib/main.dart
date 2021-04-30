@@ -8,6 +8,7 @@ import 'package:passarinho_app/stores/direcao_store.dart';
 import 'package:passarinho_app/stores/page_store.dart';
 import 'package:passarinho_app/stores/user_manager_store.dart';
 import 'package:passarinho_app/stores/valvula_store.dart';
+import 'package:passarinho_app/stores/veiculo_store.dart';
 import 'package:passarinho_app/views/Login/login_view.dart';
 import 'package:passarinho_app/views/base/base_screen.dart';
 import 'package:passarinho_app/views/inicial/inicial_screen.dart';
@@ -30,6 +31,7 @@ void setupLocation(){
   location.registerSingleton(ValvulaStore());
   location.registerSingleton(DirecaoStore());
   location.registerSingleton(ClienteStore());
+  location.registerSingleton(VeiculoStore());
 }
 
 Future<void> initializeParse() async {

@@ -1,15 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
+import 'package:passarinho_app/model/ordem_service/ordem_servico.dart';
+import 'package:passarinho_app/stores/ordem_servico_novo_store.dart';
+import 'package:passarinho_app/views/service/components/veiculo_field_service.dart';
 import 'package:passarinho_app/views/service/servico_visualizacao.dart';
 
+import 'components/cliente_field_servico.dart';
 import 'components/cliente_novo.dart';
 import 'components/veiculo_novo.dart';
 
 class ServicoCadastroScreen extends StatefulWidget {
+
+  ServicoCadastroScreen({this.ordemServico});
+
+  final OrdemServico ordemServico;
+
   @override
-  _ServicoCadastroScreenState createState() => _ServicoCadastroScreenState();
+  _ServicoCadastroScreenState createState() => _ServicoCadastroScreenState(ordemServico);
 }
 
 class _ServicoCadastroScreenState extends State<ServicoCadastroScreen> {
+
+  _ServicoCadastroScreenState(OrdemServico ordemServico)
+      : editing = ordemServico != null,
+        store = OrdemServicoNovoStore(ordemServico ?? OrdemServico());
+
+  final OrdemServicoNovoStore store;
+
+  bool editing;
+
+  @override
+  void initState() {
+    super.initState();
+
+    when((_) => store.savedAd, () {
+      Navigator.of(context).pop(true);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,21 +90,7 @@ class _ServicoCadastroScreenState extends State<ServicoCadastroScreen> {
                     ),
                   ),
                   SizedBox(height: 20,),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8),
-                    child: TextField(
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 20),
-                      cursorColor: Colors.red,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          hintText: "Escolha um cliente *",
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                  ),
+                  ClienteFieldServico(store),
                   SizedBox(
                     height: 20,
                   ),
@@ -112,21 +126,7 @@ class _ServicoCadastroScreenState extends State<ServicoCadastroScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8),
-                    child: TextField(
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 20),
-                      cursorColor: Colors.red,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          hintText: "Escolha um veiculo *",
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                  ),
+                  VeiculoFieldServico(store),
                   SizedBox(
                     height: 20,
                   ),

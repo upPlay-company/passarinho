@@ -109,4 +109,19 @@ class VeiculoNovoRepository {
     }
   }
 
+  Future<List<Veiculo>> getListVeiculo() async {
+    final queryBuilder = QueryBuilder(ParseObject(keyVeiculoTable))
+      ..orderByAscending(keyVeiculoMarca);
+
+    queryBuilder.includeObject([keyVeiculoDono, keyVeiculoValvula, keyVeiculoCombustivel, keyVeiculoCambio, keyVeiculoDirecao]);
+
+    final response = await queryBuilder.query();
+
+    if (response.success) {
+      return response.results.map((p) => Veiculo.fromParse(p)).toList();
+    } else {
+      throw ParseErrors.getDescription(response.error.code);
+    }
+  }
+
 }
