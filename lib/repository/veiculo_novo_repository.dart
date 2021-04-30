@@ -25,7 +25,7 @@ class VeiculoNovoRepository {
       parseAcl.setPublicWriteAccess(allowed: true);
       adObject.setACL(parseAcl);
 
-      adObject.set<ParseObject>(keyClienteNome,
+      adObject.set<ParseObject>(keyVeiculoDono,
           ParseObject(keyClienteTable)..set(keyClienteId, veiculo.cliente.id));
 
       adObject.set<String>(keyVeiculoPlaca, veiculo.placa);
@@ -36,13 +36,13 @@ class VeiculoNovoRepository {
       adObject.set<int>(keyVeiculoKm, veiculo.km);
       adObject.set<String>(keyVeiculoMotor, veiculo.motor);
       adObject.set<String>(keyVeiculoCor, veiculo.cor);
-      adObject.set<ParseObject>(keyDirecaoNome,
+      adObject.set<ParseObject>(keyVeiculoDirecao,
           ParseObject(keyDirecaoTable)..set(keyDirecaoId, veiculo.direcao.id));
-      adObject.set<ParseObject>(keyCambioNome,
+      adObject.set<ParseObject>(keyVeiculoCambio,
           ParseObject(keyCambioTable)..set(keyCambioId, veiculo.cambio.id));
-      adObject.set<ParseObject>(keyValvulaNumero,
+      adObject.set<ParseObject>(keyVeiculoValvula,
           ParseObject(keyValvulaTable)..set(keyValvulaId, veiculo.valvula.id));
-      adObject.set<ParseObject>(keyCombustivelNome,
+      adObject.set<ParseObject>(keyVeiculoCombustivel,
           ParseObject(keyCombustivelTable)..set(keyCombustivelId, veiculo.combustivel.id));
 
       final response = await adObject.save();

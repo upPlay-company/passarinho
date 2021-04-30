@@ -94,6 +94,8 @@ class _ClienteNovoState extends State<ClienteNovo> {
                               errorText: store.nomeError,
                               contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                               hintText: "Nome *",
+                              hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                  color: Colors.black.withAlpha(125)),
                               filled: true,
                               fillColor: Colors.grey,
                               border: OutlineInputBorder(
@@ -118,6 +120,8 @@ class _ClienteNovoState extends State<ClienteNovo> {
                               errorText: store.numeroError,
                               contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                               hintText: "Telefone *",
+                              hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                  color: Colors.black.withAlpha(125)),
                               filled: true,
                               fillColor: Colors.grey,
                               border: OutlineInputBorder(
@@ -141,6 +145,8 @@ class _ClienteNovoState extends State<ClienteNovo> {
                               errorText: store.cpjError,
                               contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                               hintText: "CPF",
+                              hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                  color: Colors.black.withAlpha(125)),
                               filled: true,
                               fillColor: Colors.grey,
                               border: OutlineInputBorder(
@@ -160,6 +166,8 @@ class _ClienteNovoState extends State<ClienteNovo> {
                               errorText: store.rgError,
                               contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                               hintText: "Rg",
+                              hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                  color: Colors.black.withAlpha(125)),
                               filled: true,
                               fillColor: Colors.grey,
                               border: OutlineInputBorder(
@@ -178,6 +186,8 @@ class _ClienteNovoState extends State<ClienteNovo> {
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                               hintText: "email",
+                              hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                  color: Colors.black.withAlpha(125)),
                               filled: true,
                               fillColor: Colors.grey,
                               border: OutlineInputBorder(
@@ -200,18 +210,16 @@ class _ClienteNovoState extends State<ClienteNovo> {
                       );
                     }),
                     SizedBox(height: 20,),
-                    Observer(builder: (_){
+                    Observer(builder: (_) {
                       return SizedBox(
                         height: 54,
-                        child: ElevatedButton(
-                          child: Text('Salvar'),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
-                              textStyle: TextStyle(
-                                fontSize: 20,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
+                        // ignore: deprecated_member_use
+                        child: RaisedButton(
+                          color: Colors.green,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          disabledColor: Colors.green[400],
+                          child: Text('Salvar', style: TextStyle(fontSize: 16, color: Colors.black),),
                           onPressed: store.sendPressed,
                         ),
                       );

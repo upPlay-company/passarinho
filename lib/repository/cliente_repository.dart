@@ -31,6 +31,7 @@ class ClienteRepository {
       adObject.set<String>(keyClienteCidade, cliente.cep.cidade.name);
       adObject.set<String>(keyClienteEstado, cliente.cep.uf.initials);
       adObject.set<String>(keyClienteCep, cliente.cep.zipCode);
+      adObject.set<String>(keyClienteRua, cliente.cep.logradouro);
 
       final response = await adObject.save();
 
@@ -40,6 +41,19 @@ class ClienteRepository {
     } catch (e) {
       print(e);
       return Future.error('Falha ao salvar anúncio');
+    }
+  }
+
+  Future<List<Cliente>> getListCliente() async {
+    final queryBuilder = QueryBuilder(ParseObject(keyClienteTable))
+      ..orderByAscending(keyDirecaoNome);
+
+    final response = await queryBuilder.query();
+
+    if (response.success) {
+      return response.results.map((p) => Cliente.fromParse(p)).toList();
+    } else {
+      throw ParseErrors.getDescription(response.error.code);
     }
   }
 

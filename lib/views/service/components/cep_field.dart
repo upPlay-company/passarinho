@@ -33,6 +33,8 @@ class CepField extends StatelessWidget {
                   errorText: clienteNovoStore.addressError,
                   contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                   hintText: "CEP",
+                  hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                      color: Colors.black.withAlpha(125)),
                   filled: true,
                   fillColor: Colors.grey,
                   border: OutlineInputBorder(
@@ -81,7 +83,7 @@ class CepField extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               alignment: Alignment.center,
               child: Text(
-                'Localização: ${a.district}, ${a.cidade.name} - ${a.uf.initials}',
+                'Localização: ${a.logradouro}, Bairro ${a.district}, ${a.cidade.name} - ${a.uf.initials}',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Colors.white,

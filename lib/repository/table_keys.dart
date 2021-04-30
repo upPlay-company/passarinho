@@ -12,11 +12,11 @@ const keyCambioTable = 'cambio';
 const keyCambioId = 'objectId';
 const keyCambioNome = 'nome';
 
-const keyCombustivelTable = 'direcao';
+const keyCombustivelTable = 'combustivel';
 const keyCombustivelId = 'objectId';
 const keyCombustivelNome = 'nome';
 
-const keyValvulaTable = 'direcao';
+const keyValvulaTable = 'valvula';
 const keyValvulaId = 'objectId';
 const keyValvulaNumero = 'numero';
 

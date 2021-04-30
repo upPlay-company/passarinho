@@ -29,7 +29,7 @@ class _BaseScreenState extends State<BaseScreen> {
         physics: NeverScrollableScrollPhysics(),
         children: [
           HomeViews(),
-          PerfilScreen(),
+          PerfilScreen()
         ],
       ),
     );

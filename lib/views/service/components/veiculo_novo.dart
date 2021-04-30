@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:passarinho_app/common/error_box.dart';
 import 'package:passarinho_app/model/veiculo/veiculo.dart';
 import 'package:passarinho_app/stores/veiculo_novo_store.dart';
+import 'package:passarinho_app/views/service/components/cliente_field.dart';
 import 'package:passarinho_app/views/service/components/direcao_field.dart';
+import 'package:passarinho_app/views/service/components/valvula_field.dart';
+
+import 'cambio_field.dart';
+import 'cumbustivel_field.dart';
 
 class VeiculoNovo extends StatefulWidget {
   VeiculoNovo({this.veiculo});
@@ -48,287 +55,273 @@ class _VeiculoNovoState extends State<VeiculoNovo> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 20),
-                    cursorColor: Colors.red,
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                        hintText: "Dono *",
-                        filled: true,
-                        fillColor: Colors.grey,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10))),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Observer(builder: (_) {
+            if (store.loading)
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: Card(
+                    color: Color(0xff2D2D3A),
+                    elevation: 0,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Salvando Veiculo',
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                Observer(builder: (_) {
-                  return Padding(
+              );
+            else
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
                     padding: EdgeInsets.only(bottom: 8),
-                    child: TextField(
-                      onChanged: store.setPlaca,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 20),
-                      cursorColor: Colors.red,
-                      decoration: InputDecoration(
-                          errorText: store.placaError,
-                          contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                          hintText: "Placa *",
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                  );
-                }),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Observer(builder: (_) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: TextFormField(
-                          onChanged: store.setMarca,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(fontSize: 20),
-                          cursorColor: Colors.red,
-                          decoration: InputDecoration(
-                              errorText: store.marcaError,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
-                              hintText: "Marca *",
-                              filled: true,
-                              fillColor: Colors.grey,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      );
-                    }),
-                    Observer(builder: (_) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: TextFormField(
-                          onChanged: store.setModelo,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(fontSize: 20),
-                          cursorColor: Colors.red,
-                          decoration: InputDecoration(
-                              errorText: store.modeloError,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
-                              hintText: "Modelo *",
-                              filled: true,
-                              fillColor: Colors.grey,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      );
-                    })
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Observer(builder: (_) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: TextFormField(
-                          onChanged: store.setAnoModelo,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(fontSize: 20),
-                          cursorColor: Colors.red,
-                          decoration: InputDecoration(
-                              errorText: store.modeloError,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
-                              hintText: "Ano Modelo *",
-                              filled: true,
-                              fillColor: Colors.grey,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      );
-                    }),
-                    Observer(builder: (_) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: TextFormField(
-                          onChanged: store.setKm,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(fontSize: 20),
-                          cursorColor: Colors.red,
-                          decoration: InputDecoration(
-                              errorText: store.kmError,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
-                              hintText: "Km *",
-                              filled: true,
-                              fillColor: Colors.grey,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      );
-                    })
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10)),
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: DirecaoField(store)),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
+                    child: ClienteField(store)
+                  ),
+                  Observer(builder: (_) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 8),
                       child: TextFormField(
+                        onChanged: store.setPlaca,
                         keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 16),
                         cursorColor: Colors.red,
                         decoration: InputDecoration(
+                            errorText: store.placaError,
                             contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Câmbio *",
+                            hintText: "Placa *",
+                            hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                color: Colors.black.withAlpha(125)),
                             filled: true,
                             fillColor: Colors.grey,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Observer(builder: (_) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: TextFormField(
-                          onChanged: store.setMotor,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(fontSize: 20),
-                          cursorColor: Colors.red,
-                          decoration: InputDecoration(
-                              errorText: store.motorError,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
-                              hintText: "Motor *",
-                              filled: true,
-                              fillColor: Colors.grey,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      );
-                    }),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Válvula *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Observer(builder: (_) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: TextFormField(
-                          onChanged: store.setCor,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(fontSize: 20),
-                          cursorColor: Colors.red,
-                          decoration: InputDecoration(
-                              errorText: store.corError,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 16, 5, 16),
-                              hintText: "Cor *",
-                              filled: true,
-                              fillColor: Colors.grey,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      );
-                    }),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.red,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(12, 16, 5, 16),
-                            hintText: "Combustível *",
-                            filled: true,
-                            fillColor: Colors.grey,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
-                  child: Row(
+                    );
+                  }),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('* Obrigatório',
-                          style: TextStyle(color: Colors.white, fontSize: 16))
+                      Observer(builder: (_) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: TextFormField(
+                            onChanged: store.setMarca,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 16),
+                            cursorColor: Colors.red,
+                            decoration: InputDecoration(
+                                errorText: store.marcaError,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(12, 16, 5, 16),
+                                hintText: "Marca *",
+                                hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                    color: Colors.black.withAlpha(125)),
+                                filled: true,
+                                fillColor: Colors.grey,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                        );
+                      }),
+                      Observer(builder: (_) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: TextFormField(
+                            onChanged: store.setModelo,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 16),
+                            cursorColor: Colors.red,
+                            decoration: InputDecoration(
+                                errorText: store.modeloError,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(12, 16, 5, 16),
+                                hintText: "Modelo *",
+                                hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                    color: Colors.black.withAlpha(125)),
+                                filled: true,
+                                fillColor: Colors.grey,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                        );
+                      })
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 54,
-                  child: ElevatedButton(
-                    child: Text('Salvar'),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
-                        textStyle: TextStyle(
-                          fontSize: 20,
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {},
+                  SizedBox(
+                    height: 8,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Observer(builder: (_) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: TextFormField(
+                            onChanged: store.setAnoModelo,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 16),
+                            cursorColor: Colors.red,
+                            decoration: InputDecoration(
+                                errorText: store.modeloError,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(12, 16, 5, 16),
+                                hintText: "Ano Modelo *",
+                                hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                    color: Colors.black.withAlpha(125)),
+                                filled: true,
+                                fillColor: Colors.grey,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                        );
+                      }),
+                      Observer(builder: (_) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: TextFormField(
+                            onChanged: store.setKm,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 16),
+                            cursorColor: Colors.red,
+                            decoration: InputDecoration(
+                                errorText: store.kmError,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(12, 16, 5, 16),
+                                hintText: "Km *",
+                                hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                    color: Colors.black.withAlpha(125)),
+                                filled: true,
+                                fillColor: Colors.grey,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                        );
+                      })
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [DirecaoField(store), CambioField(store)],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Observer(builder: (_) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: TextFormField(
+                            onChanged: store.setMotor,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 16),
+                            cursorColor: Colors.red,
+                            decoration: InputDecoration(
+                                errorText: store.motorError,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(12, 16, 5, 16),
+                                hintText: "Motor *",
+                                hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                    color: Colors.black.withAlpha(125)),
+                                filled: true,
+                                fillColor: Colors.grey,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                        );
+                      }),
+                      ValvulaField(store)
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Observer(builder: (_) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: TextFormField(
+                            onChanged: store.setCor,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 16),
+                            cursorColor: Colors.red,
+                            decoration: InputDecoration(
+                                errorText: store.corError,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(12, 16, 5, 16),
+                                hintText: "Cor *",
+                                hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                                    color: Colors.black.withAlpha(125)),
+                                filled: true,
+                                fillColor: Colors.grey,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                        );
+                      }),
+                      CombustivelField(store)
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, top: 10),
+                    child: Row(
+                      children: [
+                        Text('* Campos Obrigatório',
+                            style: TextStyle(color: Colors.white, fontSize: 16))
+                      ],
+                    ),
+                  ),
+                  Observer(builder: (_) {
+                    return ErrorBox(
+                      message: store.error,
+                    );
+                  }),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Observer(builder: (_) {
+                    return SizedBox(
+                      height: 54,
+                      child: GestureDetector(
+                        onTap: store.invalidSendPressed,
+                        // ignore: deprecated_member_use
+                        child: RaisedButton(
+                          color: Colors.green,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          disabledColor: Colors.green[400],
+                          child: Text('Salvar', style: TextStyle(fontSize: 16, color: Colors.black),),
+                          onPressed: store.sendPressed,
+                        ),
+                      ),
+                    );
+                  }),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              );
+          }),
         ),
       ),
     );

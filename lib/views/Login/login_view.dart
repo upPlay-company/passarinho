@@ -23,7 +23,7 @@ class _LoginViewState extends State<LoginView> {
     super.initState();
 
     when((_) => userManagerStore.user != null, () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => HomeViews()));
+      Navigator.of(context).pushReplacementNamed('/base');
     });
   }
 

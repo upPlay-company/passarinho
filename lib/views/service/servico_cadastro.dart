@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:passarinho_app/stores/servico_store.dart';
-import 'package:passarinho_app/views/service/components/cliente_novo.dart';
-import 'package:passarinho_app/views/service/components/veiculo_novo.dart';
-import 'servico_visualizacao.dart';
+import 'package:passarinho_app/views/service/servico_visualizacao.dart';
 
-class ServicoCadastro extends StatefulWidget {
+import 'components/cliente_novo.dart';
+import 'components/veiculo_novo.dart';
+
+class ServicoCadastroScreen extends StatefulWidget {
   @override
-  _ServicoCadastroState createState() => _ServicoCadastroState();
+  _ServicoCadastroScreenState createState() => _ServicoCadastroScreenState();
 }
 
-class _ServicoCadastroState extends State<ServicoCadastro> {
-
-  ServicoStore servicoStore = ServicoStore();
-
+class _ServicoCadastroScreenState extends State<ServicoCadastroScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -260,3 +257,4 @@ class _ServicoCadastroState extends State<ServicoCadastro> {
         ));
   }
 }
+

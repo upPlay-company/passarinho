@@ -54,14 +54,14 @@ abstract class _VeiculoNovoStore with Store {
   void setPlaca(String value) => placa = value;
 
   @computed
-  bool get placaValid => placa.length >= 8;
+  bool get placaValid => placa.length >= 5 && placa.length <=10;
   String get placaError {
     if (!showErrors || placaValid)
       return null;
     else if (placa.isEmpty)
       return 'Campo obrigatório';
     else
-      return 'placa muito curta';
+      return 'placa inválida';
   }
 
   @observable
@@ -71,13 +71,13 @@ abstract class _VeiculoNovoStore with Store {
   void setMarca(String value) => marca = value;
 
   @computed
-  bool get marcaValid => marca.length >= 99999;
+  bool get marcaValid => marca.length <= 99999;
   String get marcaError {
     if (!showErrors || marcaValid)
       return null;
     else if (marca.isEmpty)
       return 'Campo obrigatório';
-    else return null;
+    else return '';
   }
 
   @observable
@@ -87,13 +87,13 @@ abstract class _VeiculoNovoStore with Store {
   void setModelo(String value) => modelo = value;
 
   @computed
-  bool get modeloValid => modelo.length >= 99999;
+  bool get modeloValid => modelo.length <= 99999;
   String get modeloError {
     if (!showErrors || modeloValid)
       return null;
     else if (modelo.isEmpty)
       return 'Campo obrigatório';
-    else return null;
+    else return '';
   }
 
   @observable
@@ -103,13 +103,13 @@ abstract class _VeiculoNovoStore with Store {
   void setAnoModelo(String value) => anoModelo = value;
 
   @computed
-  bool get anoModeloValid => anoModelo.length >= 99999;
+  bool get anoModeloValid => anoModelo.length <= 99999;
   String get anoModeloError {
     if (!showErrors || anoModeloValid)
       return null;
     else if (anoModelo.isEmpty)
       return 'Campo obrigatório';
-    else return null;
+    else return '';
   }
 
   @observable
@@ -130,7 +130,7 @@ abstract class _VeiculoNovoStore with Store {
     else if (kmText.isEmpty)
       return 'Campo obrigatório';
     else
-      return null;
+      return '';
   }
 
   @observable
@@ -170,13 +170,13 @@ abstract class _VeiculoNovoStore with Store {
   void setMotor(String value) => motor = value;
 
   @computed
-  bool get motorValid => motor.length >= 99999;
+  bool get motorValid => motor.length <= 99999;
   String get motorError {
     if (!showErrors || motorValid)
       return null;
     else if (motor.isEmpty)
       return 'Campo obrigatório';
-    else return null;
+    else return '';
   }
 
   @observable
@@ -201,13 +201,13 @@ abstract class _VeiculoNovoStore with Store {
   void setCor(String value) => cor = value;
 
   @computed
-  bool get corValid => cor.length >= 99999;
+  bool get corValid => cor.length <= 99999;
   String get corError {
     if (!showErrors || corValid)
       return null;
     else if (cor.isEmpty)
       return 'Campo obrigatório';
-    else return null;
+    else return '';
   }
 
   @observable

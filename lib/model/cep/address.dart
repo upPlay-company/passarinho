@@ -5,7 +5,7 @@ import 'city.dart';
 
 class Address {
 
-  Address({this.district, this.zipCode, this.city, this.state, this.lat, this.long, this.cidade, this.uf});
+  Address({this.district, this.zipCode, this.city, this.state, this.lat, this.long, this.cidade, this.uf, this.logradouro});
 
   String district;
   String zipCode;
@@ -13,6 +13,7 @@ class Address {
   String state;
   double lat;
   double long;
+  String logradouro;
 
   UF uf;
   City cidade;
@@ -24,6 +25,7 @@ class Address {
     state = map['state'];
     lat = map['lat'] as double;
     long = map['long'] as double;
+    logradouro = map['logradouro'] as String;
   }
 
   Map<String, dynamic> toMap() {
@@ -34,11 +36,12 @@ class Address {
       'state': state,
       'lat': lat,
       'long': long,
+      'logradouro': logradouro
     };
   }
 
   @override
   String toString() {
-    return 'Address{district: $district, zipCode: $zipCode, city: $city, state: $state, lat: $lat, long: $long, uf: $uf, cidade: $cidade}';
+    return 'Address{district: $district, zipCode: $zipCode, city: $city, state: $state, lat: $lat, long: $long, logradouro: $logradouro, uf: $uf, cidade: $cidade}';
   }
 }

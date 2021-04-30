@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:passarinho_app/stores/veiculo_novo_store.dart';
 
-import 'direcao_screen.dart';
+import 'cliente_screen.dart';
 
-class DirecaoField extends StatelessWidget {
-  DirecaoField(this.veiculoNovoStore);
+class ClienteField extends StatelessWidget {
+  ClienteField(this.veiculoNovoStore);
 
   final VeiculoNovoStore veiculoNovoStore;
 
@@ -13,7 +13,6 @@ class DirecaoField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(builder: (_){
       return Container(
-        width: MediaQuery.of(context).size.width * 0.45,
         decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(10)
@@ -21,33 +20,33 @@ class DirecaoField extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              title: veiculoNovoStore.direcao == null
+              title: veiculoNovoStore.cliente == null
                   ? Text(
-                'Direção *',
+                'Dono *',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: Colors.black.withAlpha(125),
                   fontSize: 16,
                 ),
               ) : Text(
-                '${veiculoNovoStore.direcao.nome}',
+                '${veiculoNovoStore.cliente.nome}',
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () async {
-                final direcao = await showDialog(
+                final cliente = await showDialog(
                   context: context,
-                  builder: (_) => DirecaoScreen(
+                  builder: (_) => ClienteScreen(
                     showAll: false,
-                    selected: veiculoNovoStore.direcao,
+                    selected: veiculoNovoStore.cliente,
                   ),
                 );
-                if (direcao != null) {
-                  veiculoNovoStore.setDirecao(direcao);
+                if (cliente != null) {
+                  veiculoNovoStore.setCliente(cliente);
                 }
               },
             ),
-            if (veiculoNovoStore.direcaoError != null)
+            if (veiculoNovoStore.clienteError != null)
               Container(
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -55,7 +54,7 @@ class DirecaoField extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
                 child: Text(
-                  veiculoNovoStore.direcaoError,
+                  veiculoNovoStore.clienteError,
                   style: TextStyle(
                     color: Colors.red,
                     fontSize: 12,

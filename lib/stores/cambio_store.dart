@@ -4,24 +4,24 @@ import 'package:passarinho_app/repository/veiculo_novo_repository.dart';
 
 part 'cambio_store.g.dart';
 
-class CambiolStore = _CambiolStore with _$CambiolStore;
+class CambioStore = _CambioStore with _$CambioStore;
 
-abstract class _CambiolStore with Store {
+abstract class _CambioStore with Store {
 
-  _CambiolStore() {
+  _CambioStore() {
     _loadCambio();
   }
 
-  ObservableList<Cambio> cambiolList = ObservableList<Cambio>();
+  ObservableList<Cambio> cambioList = ObservableList<Cambio>();
 
   @computed
-  List<Cambio> get allCambiolList => List.from(cambiolList)
+  List<Cambio> get allCambioList => List.from(cambioList)
     ..insert(0, Cambio(id: '*', nome: 'Todas'));
 
   @action
   void setCambio(List<Cambio> cambio) {
-    cambiolList.clear();
-    cambiolList.addAll(cambio);
+    cambioList.clear();
+    cambioList.addAll(cambio);
   }
 
   @observable

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:passarinho_app/stores/veiculo_novo_store.dart';
 
-import 'direcao_screen.dart';
+import 'cambio_screen.dart';
 
-class DirecaoField extends StatelessWidget {
-  DirecaoField(this.veiculoNovoStore);
+class CambioField extends StatelessWidget {
+  CambioField(this.veiculoNovoStore);
 
   final VeiculoNovoStore veiculoNovoStore;
 
@@ -21,33 +21,33 @@ class DirecaoField extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              title: veiculoNovoStore.direcao == null
+              title: veiculoNovoStore.cambio == null
                   ? Text(
-                'Direção *',
+                'Câmbio *',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: Colors.black.withAlpha(125),
                   fontSize: 16,
                 ),
               ) : Text(
-                '${veiculoNovoStore.direcao.nome}',
+                '${veiculoNovoStore.cambio.nome}',
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () async {
-                final direcao = await showDialog(
+                final cambio = await showDialog(
                   context: context,
-                  builder: (_) => DirecaoScreen(
+                  builder: (_) => CambioScreen(
                     showAll: false,
-                    selected: veiculoNovoStore.direcao,
+                    selected: veiculoNovoStore.cambio,
                   ),
                 );
-                if (direcao != null) {
-                  veiculoNovoStore.setDirecao(direcao);
+                if (cambio != null) {
+                  veiculoNovoStore.setCambio(cambio);
                 }
               },
             ),
-            if (veiculoNovoStore.direcaoError != null)
+            if (veiculoNovoStore.cambioError != null)
               Container(
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -55,7 +55,7 @@ class DirecaoField extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
                 child: Text(
-                  veiculoNovoStore.direcaoError,
+                  veiculoNovoStore.cambioError,
                   style: TextStyle(
                     color: Colors.red,
                     fontSize: 12,

@@ -13,17 +13,12 @@ class InicialScreen extends StatefulWidget {
 
 class _InicialScreenState extends State<InicialScreen> {
 
-  final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
-
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays([]);
     Future.delayed(Duration(seconds: 4)).then((_){
-      if(userManagerStore.isLoggedIn)
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BaseScreen()));
-      else
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginView()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginView()));
     });
   }
 

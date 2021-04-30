@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:passarinho_app/stores/veiculo_novo_store.dart';
+import 'package:passarinho_app/views/service/components/valvula_screen.dart';
 
-import 'direcao_screen.dart';
-
-class DirecaoField extends StatelessWidget {
-  DirecaoField(this.veiculoNovoStore);
+class ValvulaField extends StatelessWidget {
+  ValvulaField(this.veiculoNovoStore);
 
   final VeiculoNovoStore veiculoNovoStore;
 
@@ -21,33 +20,33 @@ class DirecaoField extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              title: veiculoNovoStore.direcao == null
+              title: veiculoNovoStore.valvula == null
                   ? Text(
-                'Direção *',
+                'Valvula *',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: Colors.black.withAlpha(125),
                   fontSize: 16,
                 ),
               ) : Text(
-                '${veiculoNovoStore.direcao.nome}',
+                '${veiculoNovoStore.valvula.numero}',
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () async {
-                final direcao = await showDialog(
+                final valvula = await showDialog(
                   context: context,
-                  builder: (_) => DirecaoScreen(
+                  builder: (_) => ValvulaScreen(
                     showAll: false,
-                    selected: veiculoNovoStore.direcao,
+                    selected: veiculoNovoStore.valvula,
                   ),
                 );
-                if (direcao != null) {
-                  veiculoNovoStore.setDirecao(direcao);
+                if (valvula != null) {
+                  veiculoNovoStore.setValvula(valvula);
                 }
               },
             ),
-            if (veiculoNovoStore.direcaoError != null)
+            if (veiculoNovoStore.valvulaError != null)
               Container(
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -55,7 +54,7 @@ class DirecaoField extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
                 child: Text(
-                  veiculoNovoStore.direcaoError,
+                  veiculoNovoStore.valvulaError,
                   style: TextStyle(
                     color: Colors.red,
                     fontSize: 12,
